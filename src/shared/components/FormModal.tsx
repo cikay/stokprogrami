@@ -58,7 +58,7 @@ export default function ModelFormModal<T extends object>({
       setFormData({} as T)
     } else {
       const id = Number(generatorId.next().value)
-      createModel?.(formData)
+      createModel?.({ ...formData, id })
       setFormData({} as T)
     }
     console.log('closing model')

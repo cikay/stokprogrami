@@ -12,7 +12,7 @@ export default function productReducer(state: State, action: Action) {
       }
     case ProductActionTypes.Update:
       return {
-        products: state.products.filter((item) => {
+        products: state.products.map((item) => {
           if (item.id === action.payload.id) return action.payload
           return item
         }),

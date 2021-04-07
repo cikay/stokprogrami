@@ -14,7 +14,7 @@ function Products({}: Props) {
     deleteProduct,
     products,
   } = useProductContext()
-
+  console.log('products', products)
   const columns = useMemo(() => {
     return [
       {
