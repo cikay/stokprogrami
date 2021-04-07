@@ -2,9 +2,10 @@ import React from 'react'
 import { useAuthContext } from '../shared/contexts/AuthContext/AutContext'
 import { Row, Col } from 'react-bootstrap'
 import Users from './shared/components/UsersCard'
-import Storage from './shared/components/Storage'
-import Categories from './shared/components/Categories'
-import Product from './shared/components/Product'
+import Storage from './shared/components/StorageCard'
+import Categories from './shared/components/CategoryCard'
+import Product from './shared/components/ProductCard'
+
 type Props = React.PropsWithChildren<{}>
 
 export default function Home({}: Props) {

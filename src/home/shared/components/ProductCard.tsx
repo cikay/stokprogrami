@@ -1,20 +1,22 @@
 import React from 'react'
-import { BsFillPentagonFill } from 'react-icons/bs'
+import { RiProductHuntLine } from 'react-icons/ri'
+import { useHistory } from 'react-router-dom'
 import CustomizedCard from '../../../shared/components/CustomizedCard'
 type Props = React.PropsWithChildren<{}>
 
 export default function Categories({}: Props) {
+  const history = useHistory()
   return (
     <>
       <CustomizedCard
         style={{
-          backgroundColor: '#2980B9',
+          backgroundColor: '#F39C12',
         }}
-        name='Kategoriler'
+        name='Ürünler'
         count={7}
-      >
-        <BsFillPentagonFill style={{ height: '40%', width: '40%' }} />
-      </CustomizedCard>
+        Icon={RiProductHuntLine}
+        onClick={() => history.push('/products')}
+      />
     </>
   )
 }

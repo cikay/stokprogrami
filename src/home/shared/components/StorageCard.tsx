@@ -1,9 +1,11 @@
 import React from 'react'
 import { GrStorage } from 'react-icons/gr'
+import { useHistory } from 'react-router-dom'
 import CustomizedCard from '../../../shared/components/CustomizedCard'
 type Props = React.PropsWithChildren<{}>
 
 export default function Storage({}: Props) {
+  const history = useHistory()
   return (
     <>
       <CustomizedCard
@@ -12,13 +14,9 @@ export default function Storage({}: Props) {
         }}
         name='Depolar'
         count={7}
-      >
-        <GrStorage
-          style={{ height: '40%', width: '40%' }}
-          color='white'
-          colorProfile='white'
-        />
-      </CustomizedCard>
+        Icon={GrStorage}
+        onClick={() => history.push('/storage')}
+      />
     </>
   )
 }

@@ -9,10 +9,12 @@ import useLocalStorage from './shared/hooks/useLocalStorage'
 import Home from './home'
 import PrivateComponent from './shared/components/PrivateComponent'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Categories from './category'
+import Products from './product'
 
 function App() {
   const [currentUser, setCurrentUser] = useLocalStorage('currentUser')
-  console.log("currentUser", currentUser)
+  console.log('currentUser', currentUser)
   return (
     <AuthProvider>
       <Router>
@@ -33,6 +35,12 @@ function App() {
           </Route>
           <Route path='/reset-password-confirm'>
             <ResetPasswordConfirm />
+          </Route>{' '}
+          <Route path='/categories'>
+            <Categories />
+          </Route>{' '}
+          <Route path='/products'>
+            <Products />
           </Route>
         </Switch>
       </Router>
