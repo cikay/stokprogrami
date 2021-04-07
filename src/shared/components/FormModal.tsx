@@ -5,8 +5,8 @@ import { Button, Form } from 'react-bootstrap'
 import generatorId from '../help/generatorId'
 
 type Props<T> = React.PropsWithChildren<{
-  selectedModel?: T | undefined | null
-  setSelectedModel?: React.Dispatch<React.SetStateAction<T | null | undefined>>
+  selectedModel?: T
+  setSelectedModel?: React.Dispatch<React.SetStateAction<T>>
   closeModal: () => void
   show: boolean
   createModel?: (model: T) => void
@@ -36,7 +36,7 @@ export default function ModelFormModal<T extends object>({
   const resetStates = () => {
     closeModal()
     setFormData({} as T)
-    if (setSelectedModel) setSelectedModel(undefined)
+    setSelectedModel?.({} as T)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

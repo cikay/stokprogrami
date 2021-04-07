@@ -28,7 +28,7 @@ export default function FlexibleTable<T extends object>({
   updateModel,
   deleteModel,
 }: Props<T>) {
-  const [selectedModel, setSelectedModel] = useState<T | null | undefined>(null)
+  const [selectedModel, setSelectedModel] = useState({} as T)
 
   const {
     getTableProps,
@@ -50,7 +50,7 @@ export default function FlexibleTable<T extends object>({
   )
   const reset = () => {
     setShow(false)
-    setSelectedModel(null)
+    setSelectedModel({} as T)
   }
 
   const handleDelete = (model: T) => {
