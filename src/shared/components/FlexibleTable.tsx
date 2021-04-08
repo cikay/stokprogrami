@@ -59,7 +59,7 @@ export default function FlexibleTable<T extends object>({
       columns,
       data,
       defaultColumn,
-      initialState: { pageSize: 5 },
+      initialState: { pageSize: 6 },
     },
     useFilters,
     usePagination

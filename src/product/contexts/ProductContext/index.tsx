@@ -1,4 +1,5 @@
 import React, { useReducer, useContext } from 'react'
+import makeProduct from '../../../shared/help/makeData'
 import ProductActionTypes from './actionTypes'
 import reducer from './reducer'
 
@@ -11,7 +12,7 @@ export type Product = {
   category: string
 }
 
-const products: Product[] = []
+const products: Product[] = makeProduct(50)
 const initialState = {
   products,
   createProduct: (product: Product) => {},
