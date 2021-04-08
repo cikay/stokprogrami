@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Table, Button, NavDropdown } from 'react-bootstrap'
 import CustomizedModal from './CustomizedModal'
-import { useTable, usePagination } from 'react-table'
+import { useTable, usePagination, useFilters } from 'react-table'
 import FormModal from './FormModal'
+import ColumnFilter from './ColumnFilter'
+
 type Props<T extends object> = React.PropsWithChildren<{
   action: 'update' | 'delete' | 'add' | ''
   setAction: React.Dispatch<
@@ -15,6 +17,17 @@ type Props<T extends object> = React.PropsWithChildren<{
   createModel?: (model: T) => void
   updateModel?: (model: T) => void
   deleteModel?: (model: T) => void
+  defaultColumn?: {
+    Filter: ({
+      column,
+    }: React.PropsWithChildren<{
+      column: {
+        filterValue: any
+        preFilteredRows: any
+        setFilter: any
+      }
+    }>) => JSX.Element
+  }
 }>
 
 export default function FlexibleTable<T extends object>({
@@ -27,6 +40,7 @@ export default function FlexibleTable<T extends object>({
   createModel,
   updateModel,
   deleteModel,
+  defaultColumn,
 }: Props<T>) {
   const [selectedModel, setSelectedModel] = useState({} as T)
 
@@ -44,10 +58,13 @@ export default function FlexibleTable<T extends object>({
     {
       columns,
       data,
-      initialState: { pageSize: 2 },
+      defaultColumn,
+      initialState: { pageSize: 5 },
     },
+    useFilters,
     usePagination
   )
+
   const reset = () => {
     setShow(false)
     setSelectedModel({} as T)
@@ -149,6 +166,7 @@ export default function FlexibleTable<T extends object>({
                 {headerGroup.headers.map((column) => (
                   <th {...column.getHeaderProps()}>
                     {column.render('Header')}
+                    <div>{column.canFilter && column.render('Filter')}</div>
                   </th>
                 ))}
               </tr>
@@ -206,14 +224,14 @@ export default function FlexibleTable<T extends object>({
           <Button
             variant='primary'
             onClick={previousPage}
-            disabled={canNextPage}
+            disabled={!canPreviousPage}
           >
             Önceki
           </Button>
           <Button
             variant='primary'
             onClick={nextPage}
-            disabled={canPreviousPage}
+            disabled={!canNextPage}
             className='ml-2'
           >
             Sonraki

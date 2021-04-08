@@ -5,6 +5,7 @@ import {
   CategoryProvider,
 } from './contexts/CategoryContext'
 import withProvider from '../shared/hoc/withProvider'
+import ColumnFilter from '../shared/components/ColumnFilter'
 
 type Props = React.PropsWithChildren<{}>
 
@@ -31,6 +32,12 @@ function Categories({}: Props) {
     ]
   }, [])
   const data = useMemo(() => categories, [categories])
+  const defaultColumn = useMemo(
+    () => ({
+      Filter: ColumnFilter,
+    }),
+    []
+  )
   return (
     <FlexibleTable
       show={show}
@@ -42,6 +49,7 @@ function Categories({}: Props) {
       createModel={addCategory}
       updateModel={updateCategory}
       deleteModel={deleteCategory}
+      defaultColumn={defaultColumn}
     />
   )
 }

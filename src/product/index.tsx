@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 import FlexibleTable from '../shared/components/FlexibleTable'
 import { useProductContext, ProductProvider } from './contexts/ProductContext'
 import withProvider from '../shared/hoc/withProvider'
-
+import ColumnFilter from '../shared/components/ColumnFilter'
 type Props = React.PropsWithChildren<{}>
 
 function Products({}: Props) {
@@ -29,6 +29,11 @@ function Products({}: Props) {
     ]
   }, [])
   const data = useMemo(() => products, [products])
+  const defaultColumn = useMemo(() => {
+    return {
+      Filter: ColumnFilter,
+    }
+  }, [])
   return (
     <FlexibleTable
       show={show}
@@ -40,6 +45,7 @@ function Products({}: Props) {
       createModel={createProduct}
       updateModel={updateProduct}
       deleteModel={deleteProduct}
+      defaultColumn={defaultColumn}
     />
   )
 }
