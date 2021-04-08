@@ -12,7 +12,15 @@ export type Product = {
   category: string
 }
 
-const products: Product[] = makeProduct(50)
+const products: Product[] = makeProduct(50, {
+  name: '',
+  description: '',
+  storage: '',
+  category: '',
+  id: -100,
+})
+console.log('products')
+console.table(products)
 const initialState = {
   products,
   createProduct: (product: Product) => {},

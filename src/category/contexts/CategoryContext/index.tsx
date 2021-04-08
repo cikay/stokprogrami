@@ -1,9 +1,16 @@
 import React, { useContext, useReducer, Dispatch } from 'react'
+import makeData from '../../../shared/help/makeData'
 import CategoryActionTypes from './actionTypes'
 import categoryReducer, { Category, CategoryAction } from './reducer'
 type Props = React.PropsWithChildren<{}>
-const categories: Category[] = []
-
+const categories: Category[] = makeData(50, {
+  name: '',
+  description: '',
+  storage: '',
+  id: -100,
+})
+console.log('categories')
+console.table(categories)
 const initialState = {
   categories,
   addCategory: (category: Category) => {},
