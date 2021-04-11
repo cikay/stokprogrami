@@ -13,6 +13,7 @@ export default function ColumnFilter({ column }: Props) {
   return (
     <span>
       <input
+        className='form-control'
         value={filterValue || ''}
         onChange={(e) => setFilter(e.target.value)}
       />
