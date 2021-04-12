@@ -12,7 +12,7 @@ export type Product = {
   category: string
 }
 
-const products: Product[] = makeProduct(50, {
+const products: Product[] = makeProduct(Math.random() * 100, {
   name: '',
   description: '',
   storage: '',

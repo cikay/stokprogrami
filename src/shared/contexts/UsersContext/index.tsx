@@ -10,7 +10,7 @@ export type User = {
   lastname: string
 }
 
-const users: User[] = makeProduct(50, {
+const users: User[] = makeProduct(Math.random() * 100, {
   firstname: '',
   lastname: '',
   id: -100,

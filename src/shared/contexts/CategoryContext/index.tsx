@@ -3,7 +3,7 @@ import makeData from '../../help/makeData'
 import CategoryActionTypes from './actionTypes'
 import categoryReducer, { Category, CategoryAction } from './reducer'
 type Props = React.PropsWithChildren<{}>
-const categories: Category[] = makeData(50, {
+const categories: Category[] = makeData(Math.random() * 100, {
   name: '',
   description: '',
   storage: '',

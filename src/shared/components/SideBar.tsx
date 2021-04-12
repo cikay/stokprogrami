@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { FaUsers, FaCartPlus } from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import { BsFillPentagonFill } from 'react-icons/bs'
+import { GrStorage } from 'react-icons/gr'
 
 import { Link } from 'react-router-dom'
 import './sidebar.css'
@@ -20,6 +21,12 @@ export const SidebarData = [
     title: 'Users',
     path: '/users',
     icon: <FaUsers />,
+    cName: 'nav-text',
+  },
+  {
+    title: 'Depolar',
+    path: '/storages',
+    icon: <GrStorage />,
     cName: 'nav-text',
   },
   {

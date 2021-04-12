@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Categories from './category'
 import Products from './product'
 import Users from './users'
+import Storages from './storage'
 import CustomizedSidebar from './shared/components/SideBar'
 import { ProductProvider } from './shared/contexts/ProductContext'
 import { CategoryProvider } from './shared/contexts/CategoryContext'
@@ -62,6 +63,9 @@ function App() {
                   </Route>
                   <Route path='/users'>
                     <Users />
+                  </Route>
+                  <Route path='/storages'>
+                    <Storages />
                   </Route>
                 </Switch>
               </Col>

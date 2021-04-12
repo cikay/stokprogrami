@@ -15,7 +15,7 @@ export default function Storage({ count }: Props) {
         name='Depolar'
         count={count}
         Icon={GrStorage}
-        onClick={() => history.push('/storage')}
+        onClick={() => history.push('/storages')}
       />
     </>
   )
