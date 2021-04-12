@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import 'react-pro-sidebar/dist/css/styles.css'
 
 import { FaUsers, FaCartPlus } from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'

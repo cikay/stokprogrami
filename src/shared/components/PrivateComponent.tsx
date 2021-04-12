@@ -3,11 +3,12 @@ import { useAuthContext } from '../contexts/AuthContext/AutContext'
 import Login from '../../auth/Login'
 type Props = React.PropsWithChildren<{
   onSubmitUser: React.Dispatch<any>
+  Component: JSX.Element
 }>
-export default function PrivateComponent({ children, onSubmitUser }: Props) {
-  console.log('children', children)
+export default function PrivateComponent({ Component, onSubmitUser }: Props) {
+  console.log('Component', Component)
   const { isAuthenticated } = useAuthContext()
   return (
-    <>{isAuthenticated ? children : <Login onSubmitUser={onSubmitUser} />}</>
+    <>{isAuthenticated ? Component : <Login onSubmitUser={onSubmitUser} />}</>
   )
 }

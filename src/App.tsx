@@ -8,10 +8,12 @@ import ResetPassword from './auth/ResetPassword'
 import ResetPasswordConfirm from './auth/ResetPasswordConfirm'
 import useLocalStorage from './shared/hooks/useLocalStorage'
 import Home from './home'
+
 import PrivateComponent from './shared/components/PrivateComponent'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Categories from './category'
 import Products from './product'
+import Users from './users'
 import CustomizedSidebar from './shared/components/SideBar'
 import { ProductProvider } from './shared/contexts/ProductContext'
 import { CategoryProvider } from './shared/contexts/CategoryContext'
@@ -26,18 +28,22 @@ function App() {
         <ProductProvider>
           <Router>
             <Row>
-              <Col sm={3}>
-                <CustomizedSidebar />
+              <Col sm={12} md={3}>
+                <PrivateComponent
+                  Component={<CustomizedSidebar />}
+                  onSubmitUser={setCurrentUser}
+                />
               </Col>
-              <Col sm={9}>
+              <Col sm={12} md={9}>
                 <Switch>
                   <Route path='/login'>
                     <Login onSubmitUser={setCurrentUser} />
                   </Route>
                   <Route exact path='/'>
-                    <PrivateComponent onSubmitUser={setCurrentUser}>
-                      <Home />
-                    </PrivateComponent>
+                    <PrivateComponent
+                      Component={<Home />}
+                      onSubmitUser={setCurrentUser}
+                    />
                   </Route>
                   <Route path='/signup'>
                     <Signup />
@@ -53,6 +59,9 @@ function App() {
                   </Route>{' '}
                   <Route path='/products'>
                     <Products />
+                  </Route>
+                  <Route path='/users'>
+                    <Users />
                   </Route>
                 </Switch>
               </Col>

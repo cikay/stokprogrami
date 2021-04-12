@@ -24,11 +24,9 @@ export default function CustomizedCard({
     ...style,
   }
   return (
-    <Card className={className} style={totalStyle}>
+    <Card className={`text-white ${className}`} style={totalStyle}>
       <Card.Body>
-        <IconContext.Provider
-          value={{ color: 'white', className: 'global-class-name' }}
-        >
+        <IconContext.Provider value={{ color: 'white' }}>
           <Icon
             style={{ height: '40%', width: '40%', cursor: 'pointer' }}
             onClick={onClick}
