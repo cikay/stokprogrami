@@ -148,95 +148,91 @@ export default function FlexibleTable<T extends object>({
 
   return (
     <>
-      <div>
-        <Button
-          variant='success'
-          onClick={() => {
-            setShow(true)
-            setAction('add')
-          }}
-          className='mt-2 mb-2'
-        >
-          Ekle
-        </Button>
-        <Table responsive {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps()}>
-                    {column.render('Header')}
-                    <div>{column.canFilter && column.render('Filter')}</div>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row) => {
-              prepareRow(row)
-              return (
-                <>
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
-                      console.log(row.getRowProps())
-                      return (
-                        <>
-                          <td {...cell.getCellProps()}>
-                            {cell.render('Cell')}
-                          </td>
-                        </>
-                      )
-                    })}
-                    <div className='align-middle'>
-                      <NavDropdown
-                        title='Aksiyonlar'
-                        id='basic-nav-dropdown'
-                        className='ml-auto'
-                        style={{
-                          right: '0 !important',
-                          left: 'auto !important',
+      <Button
+        variant='success'
+        onClick={() => {
+          setShow(true)
+          setAction('add')
+        }}
+        className='mt-2 mb-2'
+      >
+        Ekle
+      </Button>
+      <Table responsive {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()}>
+                  {column.render('Header')}
+                  <div>{column.canFilter && column.render('Filter')}</div>
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {page.map((row) => {
+            prepareRow(row)
+            return (
+              <>
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    console.log(row.getRowProps())
+                    return (
+                      <>
+                        <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                      </>
+                    )
+                  })}
+                  <div className='align-middle'>
+                    <NavDropdown
+                      title='Aksiyonlar'
+                      id='basic-nav-dropdown'
+                      className='ml-auto'
+                      style={{
+                        right: '0 !important',
+                        left: 'auto !important',
+                      }}
+                    >
+                      <NavDropdown.Item
+                        onClick={() => {
+                          console.log('row', row.original)
+                          handleUpdate(row.original)
                         }}
                       >
-                        <NavDropdown.Item
-                          onClick={() => {
-                            console.log('row', row.original)
-                            handleUpdate(row.original)
-                          }}
-                        >
-                          Update
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          onClick={() => handleDelete(row.original)}
-                        >
-                          Delete
-                        </NavDropdown.Item>
-                      </NavDropdown>
-                    </div>
-                  </tr>
-                </>
-              )
-            })}
-          </tbody>
-        </Table>
-        {ModalForm()}
-        <div className='mt-2 float-left'>
-          <Button
-            variant='primary'
-            onClick={previousPage}
-            disabled={!canPreviousPage}
-          >
-            Önceki
-          </Button>
-          <Button
-            variant='primary'
-            onClick={nextPage}
-            disabled={!canNextPage}
-            className='ml-2'
-          >
-            Sonraki
-          </Button>
-        </div>
+                        Update
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        onClick={() => handleDelete(row.original)}
+                      >
+                        Delete
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </div>
+                </tr>
+              </>
+            )
+          })}
+        </tbody>
+      </Table>
+      {ModalForm()}
+      <div className='mt-2 float-left'>
+        <Button
+          variant='primary'
+          onClick={previousPage}
+          disabled={!canPreviousPage}
+        >
+          Önceki
+        </Button>
+        <Button
+          variant='primary'
+          onClick={nextPage}
+          disabled={!canNextPage}
+          className='ml-2'
+        >
+          Sonraki
+        </Button>
       </div>
     </>
   )

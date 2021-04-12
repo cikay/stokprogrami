@@ -1,5 +1,5 @@
 import React, { useContext, useReducer, Dispatch } from 'react'
-import makeData from '../../../shared/help/makeData'
+import makeData from '../../help/makeData'
 import CategoryActionTypes from './actionTypes'
 import categoryReducer, { Category, CategoryAction } from './reducer'
 type Props = React.PropsWithChildren<{}>

@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import FlexibleTable from '../shared/components/FlexibleTable'
-import { useProductContext, ProductProvider } from './contexts/ProductContext'
-import withProvider from '../shared/hoc/withProvider'
+import { useProductContext } from '../shared/contexts/ProductContext'
 import ColumnFilter from '../shared/components/ColumnFilter'
 type Props = React.PropsWithChildren<{}>
 
@@ -49,4 +48,4 @@ function Products({}: Props) {
     />
   )
 }
-export default withProvider(Products, ProductProvider)
+export default Products

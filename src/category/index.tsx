@@ -1,9 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import FlexibleTable from '../shared/components/FlexibleTable'
-import {
-  useCategoryContext,
-  CategoryProvider,
-} from './contexts/CategoryContext'
+import { useCategoryContext } from '../shared/contexts/CategoryContext'
 import withProvider from '../shared/hoc/withProvider'
 import ColumnFilter from '../shared/components/ColumnFilter'
 
@@ -53,4 +50,4 @@ function Categories({}: Props) {
     />
   )
 }
-export default withProvider(Categories, CategoryProvider)
+export default Categories

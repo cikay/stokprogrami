@@ -2,9 +2,9 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { FaUsers } from 'react-icons/fa'
 import CustomizedCard from '../../../shared/components/CustomizedCard'
-type Props = React.PropsWithChildren<{}>
+type Props = React.PropsWithChildren<{ count: number }>
 
-export default function UsersCard({}: Props) {
+export default function UsersCard({ count }: Props) {
   const history = useHistory()
   return (
     <>
@@ -13,7 +13,7 @@ export default function UsersCard({}: Props) {
           backgroundColor: 'red',
         }}
         name='Kullanıcılar'
-        count={7}
+        count={count}
         Icon={FaUsers}
         onClick={() => history.push('/users')}
       />

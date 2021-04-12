@@ -1,25 +1,24 @@
 import React from 'react'
-import { useAuthContext } from '../shared/contexts/AuthContext/AutContext'
-import { Row, Col } from 'react-bootstrap'
 import Users from './shared/components/UsersCard'
 import Storage from './shared/components/StorageCard'
 import Categories from './shared/components/CategoryCard'
 import Product from './shared/components/ProductCard'
+import { useAuthContext } from '../shared/contexts/AuthContext/AutContext'
+import { useCategoryContext } from '../shared/contexts/CategoryContext'
+import { useProductContext } from '../shared/contexts/ProductContext'
 
 type Props = React.PropsWithChildren<{}>
 
 export default function Home({}: Props) {
+  const { categories } = useCategoryContext()
+  const { products } = useProductContext()
   return (
     <>
-      <Row>
-        <Col sm={12} md={2}></Col>
-        <Col sm={12} md={8}>
-          <div className='mt-5'>
-            <Users /> <Storage /> <Categories /> <Product />
-          </div>
-        </Col>
-        <Col sm={12} md={8}></Col>
-      </Row>
+      <div className='mt-5'>
+        <Users count={0} /> <Storage count={0} />{' '}
+        <Categories count={categories.length} />{' '}
+        <Product count={products.length} />
+      </div>
     </>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useReducer, useContext } from 'react'
-import makeProduct from '../../../shared/help/makeData'
+import makeProduct from '../../help/makeData'
 import ProductActionTypes from './actionTypes'
 import reducer from './reducer'
 

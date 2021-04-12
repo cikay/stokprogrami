@@ -1,10 +1,10 @@
 import React from 'react'
-import { RiProductHuntLine } from 'react-icons/ri'
+import { FaCartPlus } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom'
 import CustomizedCard from '../../../shared/components/CustomizedCard'
-type Props = React.PropsWithChildren<{}>
+type Props = React.PropsWithChildren<{ count: number }>
 
-export default function Categories({}: Props) {
+export default function Categories({ count }: Props) {
   const history = useHistory()
   return (
     <>
@@ -13,8 +13,8 @@ export default function Categories({}: Props) {
           backgroundColor: '#F39C12',
         }}
         name='Ürünler'
-        count={7}
-        Icon={RiProductHuntLine}
+        count={count}
+        Icon={FaCartPlus}
         onClick={() => history.push('/products')}
       />
     </>

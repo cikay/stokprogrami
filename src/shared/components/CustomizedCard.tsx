@@ -1,5 +1,6 @@
 import { Button, Card } from 'react-bootstrap'
-import { IconType } from 'react-icons'
+import { IconType, IconContext } from 'react-icons'
+
 type CustomizedCardProps = React.PropsWithChildren<{
   className?: string
   style?: React.CSSProperties | undefined
@@ -25,10 +26,14 @@ export default function CustomizedCard({
   return (
     <Card className={className} style={totalStyle}>
       <Card.Body>
-        <Icon
-          style={{ height: '40%', width: '40%', cursor: 'pointer' }}
-          onClick={onClick}
-        />
+        <IconContext.Provider
+          value={{ color: 'white', className: 'global-class-name' }}
+        >
+          <Icon
+            style={{ height: '40%', width: '40%', cursor: 'pointer' }}
+            onClick={onClick}
+          />
+        </IconContext.Provider>
 
         <div className='float-right align-middle'>
           <p className='text-center'>{count} </p>
