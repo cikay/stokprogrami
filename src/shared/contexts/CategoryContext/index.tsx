@@ -1,9 +1,9 @@
 import React, { useContext, useReducer, Dispatch } from 'react'
 import makeData from '../../help/makeData'
 import CategoryActionTypes from './actionTypes'
-import categoryReducer, { Category, CategoryAction } from './reducer'
+import categoryReducer, { Category } from './reducer'
 type Props = React.PropsWithChildren<{}>
-const categories: Category[] = makeData(Math.random() * 100, {
+const categories: Category[] = makeData(Math.random() * 30, {
   name: '',
   description: '',
   storage: '',
@@ -13,7 +13,7 @@ console.log('categories')
 console.table(categories)
 const initialState = {
   categories,
-  addCategory: (category: Category) => {},
+  createCategory: (category: Category) => {},
   deleteCategory: (category: Category) => {},
   updateCategory: (category: Category) => {},
 }
@@ -21,7 +21,7 @@ const CategoryContext = React.createContext(initialState)
 const useCategoryContext = () => useContext(CategoryContext)
 function CategoryProvider({ children }: Props) {
   const [state, dispatch] = useReducer(categoryReducer, initialState)
-  const addCategory = (payload: Category) => {
+  const createCategory = (payload: Category) => {
     console.log('created category')
     dispatch({ type: CategoryActionTypes.ADD, payload })
   }
@@ -31,7 +31,7 @@ function CategoryProvider({ children }: Props) {
   const updateCategory = (payload: Category) => {
     dispatch({ type: CategoryActionTypes.UPDATE, payload })
   }
-  const value = { ...state, addCategory, updateCategory, deleteCategory }
+  const value = { ...state, createCategory, updateCategory, deleteCategory }
   return (
     <CategoryContext.Provider value={value}>
       {children}

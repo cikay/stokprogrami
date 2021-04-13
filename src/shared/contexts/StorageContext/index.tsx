@@ -11,7 +11,7 @@ export type Storage = {
   description: string
 }
 
-const storages: Storage[] = makeProduct(Math.random() * 100, {
+const storages: Storage[] = makeProduct(Math.random() * 30, {
   name: '',
   adress: '',
   description: '',

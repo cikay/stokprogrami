@@ -1,52 +1,37 @@
-import React, { useState, useMemo } from 'react'
-import FlexibleTable from '../shared/components/FlexibleTable'
+import React from 'react'
+import CustomizedTable from '../shared/components/CustomizedTable'
+import ModalType from '../shared/types/ModalType'
 import { useCategoryContext } from '../shared/contexts/CategoryContext'
-import withProvider from '../shared/hoc/withProvider'
-import ColumnFilter from '../shared/components/ColumnFilter'
+const categoryColumns = [
+  {
+    Header: 'Kategoriler',
+    columns: [
+      { Header: 'Ad', accessor: 'name' },
+      { Header: 'Açıklama', accessor: 'description' },
+      { Header: 'Depo', accessor: 'storage' },
+    ],
+  },
+]
 
-type Props = React.PropsWithChildren<{}>
-
-function Categories({}: Props) {
-  const [action, setAction] = useState<'add' | 'update' | 'delete' | ''>('')
-  const [show, setShow] = useState(false)
+function Categories({ action, setAction, show, setShow }: ModalType) {
   const {
-    addCategory,
     categories,
-    deleteCategory,
+    createCategory,
     updateCategory,
+    deleteCategory,
   } = useCategoryContext()
-  console.log('categories component')
-  const columns = useMemo(() => {
-    return [
-      {
-        Header: 'Kategoriler',
-        columns: [
-          { Header: 'Ad', accessor: 'name' },
-          { Header: 'Açıklama', accessor: 'description' },
-          { Header: 'Depo', accessor: 'storage' },
-        ],
-      },
-    ]
-  }, [])
-  const data = useMemo(() => categories, [categories])
-  const defaultColumn = useMemo(
-    () => ({
-      Filter: ColumnFilter,
-    }),
-    []
-  )
+
   return (
-    <FlexibleTable
-      show={show}
-      setShow={setShow}
+    <CustomizedTable
       action={action}
       setAction={setAction}
-      columns={columns}
-      data={data}
-      createModel={addCategory}
+      show={show}
+      setShow={setShow}
+      columns={categoryColumns}
+      data={categories}
+      createModel={createCategory}
       updateModel={updateCategory}
       deleteModel={deleteCategory}
-      defaultColumn={defaultColumn}
     />
   )
 }

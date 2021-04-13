@@ -1,43 +1,31 @@
 import React, { useState, useMemo } from 'react'
-import FlexibleTable from '../shared/components/FlexibleTable'
+import CustomizedTable from '../shared/components/CustomizedTable'
+import ModalType from '../shared/types/ModalType'
 import { useUserContext } from '../shared/contexts/UsersContext'
-import ColumnFilter from '../shared/components/ColumnFilter'
-type Props = React.PropsWithChildren<{}>
+const userColumns = [
+  {
+    Header: 'Kullanıcılar',
+    columns: [
+      { Header: 'Ad', accessor: 'firstname' },
+      { Header: 'Soyad', accessor: 'lastname' },
+    ],
+  },
+]
 
-function Users({}: Props) {
-  const [action, setAction] = useState<'add' | 'update' | 'delete' | ''>('')
-  const [show, setShow] = useState(false)
-  const { createUser, updateUser, deleteUser, users } = useUserContext()
-  console.log('users', users)
-  const columns = useMemo(() => {
-    return [
-      {
-        Header: 'Kullanıcılar',
-        columns: [
-          { Header: 'Ad', accessor: 'firstname' },
-          { Header: 'Soyad', accessor: 'lastname' },
-        ],
-      },
-    ]
-  }, [])
-  const data = useMemo(() => users, [users])
-  const defaultColumn = useMemo(() => {
-    return {
-      Filter: ColumnFilter,
-    }
-  }, [])
+function Users({ action, setAction, show, setShow }: ModalType) {
+  const { users, createUser, updateUser, deleteUser } = useUserContext()
+
   return (
-    <FlexibleTable
-      show={show}
-      setShow={setShow}
+    <CustomizedTable
       action={action}
       setAction={setAction}
-      columns={columns}
-      data={data}
+      show={show}
+      setShow={setShow}
+      columns={userColumns}
+      data={users}
       createModel={createUser}
       updateModel={updateUser}
       deleteModel={deleteUser}
-      defaultColumn={defaultColumn}
     />
   )
 }

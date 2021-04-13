@@ -1,50 +1,38 @@
 import React, { useState, useMemo } from 'react'
-import FlexibleTable from '../shared/components/FlexibleTable'
 import { useProductContext } from '../shared/contexts/ProductContext'
-import ColumnFilter from '../shared/components/ColumnFilter'
-type Props = React.PropsWithChildren<{}>
+import CustomizedTable from '../shared/components/CustomizedTable'
 
-function Products({}: Props) {
-  const [action, setAction] = useState<'add' | 'update' | 'delete' | ''>('')
-  const [show, setShow] = useState(false)
+import ModalType from '../shared/types/ModalType'
+const productColumns = [
+  {
+    Header: 'Ürünler',
+    columns: [
+      { Header: 'Ad', accessor: 'name' },
+      { Header: 'Açıklama', accessor: 'description' },
+      { Header: 'Depo', accessor: 'storage' },
+      { Header: 'Kategori', accessor: 'category' },
+    ],
+  },
+]
+function Products({ action, setAction, show, setShow }: ModalType) {
   const {
+    products,
     createProduct,
     updateProduct,
     deleteProduct,
-    products,
   } = useProductContext()
-  console.log('products', products)
-  const columns = useMemo(() => {
-    return [
-      {
-        Header: 'Ürünler',
-        columns: [
-          { Header: 'Ad', accessor: 'name' },
-          { Header: 'Açıklama', accessor: 'description' },
-          { Header: 'Depo', accessor: 'storage' },
-          { Header: 'Kategori', accessor: 'category' },
-        ],
-      },
-    ]
-  }, [])
-  const data = useMemo(() => products, [products])
-  const defaultColumn = useMemo(() => {
-    return {
-      Filter: ColumnFilter,
-    }
-  }, [])
+
   return (
-    <FlexibleTable
-      show={show}
-      setShow={setShow}
+    <CustomizedTable
       action={action}
       setAction={setAction}
-      columns={columns}
-      data={data}
+      show={show}
+      setShow={setShow}
+      columns={productColumns}
+      data={products}
       createModel={createProduct}
       updateModel={updateProduct}
       deleteModel={deleteProduct}
-      defaultColumn={defaultColumn}
     />
   )
 }

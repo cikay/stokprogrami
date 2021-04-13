@@ -1,51 +1,35 @@
-import React, { useState, useMemo } from 'react'
-import FlexibleTable from '../shared/components/FlexibleTable'
 import { useStorageContext } from '../shared/contexts/StorageContext'
-import ColumnFilter from '../shared/components/ColumnFilter'
+import CustomizedTable from '../shared/components/CustomizedTable'
 
-type Props = React.PropsWithChildren<{}>
-
-function Storages({}: Props) {
-  const [action, setAction] = useState<'add' | 'update' | 'delete' | ''>('')
-  const [show, setShow] = useState(false)
+import ModalType from '../shared/types/ModalType'
+const storageColumns = [
+  {
+    Header: 'Depolar',
+    columns: [
+      { Header: 'Depo Adı', accessor: 'name' },
+      { Header: 'Adres', accessor: 'adress' },
+      { Header: 'Açıklama', accessor: 'description' },
+    ],
+  },
+]
+function Storages({ action, setAction, show, setShow }: ModalType) {
   const {
     storages,
     createStorage,
     deleteStorage,
     updateStorage,
   } = useStorageContext()
-  console.log('categories component')
-  const columns = useMemo(() => {
-    return [
-      {
-        Header: 'Depolar',
-        columns: [
-          { Header: 'Depo Adı', accessor: 'name' },
-          { Header: 'Adres', accessor: 'adress' },
-          { Header: 'Açıklama', accessor: 'description' },
-        ],
-      },
-    ]
-  }, [])
-  const data = useMemo(() => storages, [storages])
-  const defaultColumn = useMemo(
-    () => ({
-      Filter: ColumnFilter,
-    }),
-    []
-  )
   return (
-    <FlexibleTable
-      show={show}
-      setShow={setShow}
+    <CustomizedTable
       action={action}
       setAction={setAction}
-      columns={columns}
-      data={data}
+      show={show}
+      setShow={setShow}
+      columns={storageColumns}
+      data={storages}
       createModel={createStorage}
-      updateModel={updateStorage}
-      deleteModel={deleteStorage}
-      defaultColumn={defaultColumn}
+      updateModel={deleteStorage}
+      deleteModel={updateStorage}
     />
   )
 }
