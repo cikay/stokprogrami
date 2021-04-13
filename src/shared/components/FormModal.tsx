@@ -70,7 +70,7 @@ export default function ModelFormModal<T extends object>({
     <CustomizedModal
       show={show}
       onHide={resetStates}
-      title={selectedModel ? 'Güncelle' : 'Kullanıcı Ekle'}
+      title={selectedModel ? 'Güncelle' : 'Ekle'}
     >
       <Card className='w-100' style={{ maxWidth: '430px' }}>
         <Card.Body>
