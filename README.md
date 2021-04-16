@@ -1,3 +1,3 @@
-## Live server
+## Live
 
 https://stokprogrami.netlify.app/
