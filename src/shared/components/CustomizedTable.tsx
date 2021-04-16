@@ -23,7 +23,7 @@ type Props<T> = React.PropsWithChildren<{
   deleteModel: (model: T) => void
 }>
 
-function Categories<T extends object>({
+function CustomizedTable<T extends object>({
   action,
   setAction,
   show,
@@ -240,4 +240,4 @@ function Categories<T extends object>({
     </>
   )
 }
-export default Categories
+export default CustomizedTable
