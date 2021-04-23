@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react'
+import { useState } from 'react'
 import CustomizedTable from '../shared/components/CustomizedTable'
 import ModalType from '../shared/types/ModalType'
-import { useUserContext } from '../shared/contexts/UsersContext'
+import { User, useUserContext } from '../shared/contexts/UsersContext'
+import FormModal from '../shared/components/FormModal'
 const userColumns = [
   {
     Header: 'Kullanıcılar',
@@ -14,18 +15,31 @@ const userColumns = [
 
 function Users({ action, setAction, show, setShow }: ModalType) {
   const { users, createUser, updateUser, deleteUser } = useUserContext()
+  const [selectedModel, setSelectedModel] = useState({} as User)
 
-  return (
-    <CustomizedTable
+  const formModalElement = (
+    <FormModal
       action={action}
       setAction={setAction}
       show={show}
       setShow={setShow}
-      columns={userColumns}
-      data={users}
+      inputs={userColumns[0].columns}
       createModel={createUser}
       updateModel={updateUser}
       deleteModel={deleteUser}
+      closeModal={() => setShow(false)}
+      selectedModel={selectedModel}
+    />
+  )
+
+  return (
+    <CustomizedTable
+      data={users}
+      columns={userColumns}
+      setAction={setAction}
+      setShow={setShow}
+      formModal={formModalElement}
+      setSelectedModel={setSelectedModel}
     />
   )
 }

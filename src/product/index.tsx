@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from 'react'
-import { useProductContext } from '../shared/contexts/ProductContext'
+import { useState } from 'react'
+import { Product, useProductContext } from '../shared/contexts/ProductContext'
 import CustomizedTable from '../shared/components/CustomizedTable'
 
 import ModalType from '../shared/types/ModalType'
+import FormModal from '../shared/components/FormModal'
 const productColumns = [
   {
     Header: 'Ürünler',
@@ -21,18 +22,32 @@ function Products({ action, setAction, show, setShow }: ModalType) {
     updateProduct,
     deleteProduct,
   } = useProductContext()
+  console.log('product rendered')
+  const [selectedModel, setSelectedModel] = useState({} as Product)
 
-  return (
-    <CustomizedTable
+  const formModalElement = (
+    <FormModal
       action={action}
       setAction={setAction}
       show={show}
       setShow={setShow}
-      columns={productColumns}
-      data={products}
+      inputs={productColumns[0].columns}
       createModel={createProduct}
       updateModel={updateProduct}
       deleteModel={deleteProduct}
+      closeModal={() => setShow(false)}
+      selectedModel={selectedModel}
+    />
+  )
+
+  return (
+    <CustomizedTable
+      data={products}
+      columns={productColumns}
+      setAction={setAction}
+      setShow={setShow}
+      formModal={formModalElement}
+      setSelectedModel={setSelectedModel}
     />
   )
 }

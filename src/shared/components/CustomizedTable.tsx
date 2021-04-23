@@ -4,6 +4,7 @@ import { Table, Button, NavDropdown } from 'react-bootstrap'
 import CustomizedModal from './CustomizedModal'
 import { useTable, usePagination, useFilters } from 'react-table'
 import FormModal from './FormModal'
+import { ModalActionType } from '../types/ModalType'
 
 type Columns = {
   Header: string
@@ -11,30 +12,21 @@ type Columns = {
 }[]
 type Props<T> = React.PropsWithChildren<{
   columns: Columns
-  action: 'add' | 'update' | 'delete' | ''
-  setAction: React.Dispatch<
-    React.SetStateAction<'' | 'add' | 'update' | 'delete'>
-  >
-  show: boolean
+  setAction: React.Dispatch<React.SetStateAction<ModalActionType>>
   setShow: React.Dispatch<React.SetStateAction<boolean>>
   data: T[]
-  createModel: (model: T) => void
-  updateModel: (model: T) => void
-  deleteModel: (model: T) => void
+  formModal?: JSX.Element
+  setSelectedModel: React.Dispatch<React.SetStateAction<T>>
 }>
 
 function CustomizedTable<T extends object>({
-  action,
   setAction,
-  show,
   setShow,
   columns,
   data,
-  createModel,
-  updateModel,
-  deleteModel,
+  formModal,
+  setSelectedModel,
 }: Props<T>) {
-  console.log('categories component')
   const cachedColumns = useMemo(() => {
     return columns
   }, [])
@@ -45,7 +37,6 @@ function CustomizedTable<T extends object>({
     }),
     []
   )
-  const [selectedModel, setSelectedModel] = useState({} as T)
 
   const {
     getTableProps,
@@ -81,72 +72,10 @@ function CustomizedTable<T extends object>({
 
   const handleUpdate = async (model: T) => {
     setSelectedModel(model)
+    console.log('handle update model', model)
     setShow(true)
     console.log('model ', model)
     setAction('update')
-  }
-
-  function ModalForm() {
-    console.log('Modal Form')
-    if (action === 'add') {
-      console.log('add user')
-      return (
-        <>
-          <FormModal
-            closeModal={() => setShow(false)}
-            show={show}
-            createModel={createModel}
-            updateModel={updateModel}
-            columns={(columns as any)[0].columns}
-          />
-        </>
-      )
-    } else if (action === 'update') {
-      console.log('selectedModel', selectedModel)
-      return (
-        <>
-          <FormModal
-            selectedModel={selectedModel}
-            setSelectedModel={setSelectedModel}
-            closeModal={() => setShow(false)}
-            show={show}
-            createModel={createModel}
-            updateModel={updateModel}
-            columns={(columns as any)[0].columns}
-          />
-        </>
-      )
-    } else if (action === 'delete') {
-      return (
-        <>
-          {deleteModel && (
-            <CustomizedModal
-              show={show}
-              onHide={reset}
-              title={'Silmek istediğinize emin misiniz?'}
-            >
-              <div className='mr-auto'>
-                <Button variant='secondary' onClick={reset}>
-                  İptal
-                </Button>
-                <Button
-                  variant='danger'
-                  className='float-right'
-                  onClick={() => {
-                    if (selectedModel) {
-                      deleteModel(selectedModel)
-                    }
-                    reset()
-                  }}
-                >
-                  Sil
-                </Button>
-              </div>
-            </CustomizedModal>
-          )}
-        </>
-      )
-    }
   }
 
   return (
@@ -155,7 +84,7 @@ function CustomizedTable<T extends object>({
         variant='success'
         onClick={() => {
           setShow(true)
-          setAction('add')
+          setAction('create')
         }}
         className='mt-2 mb-2'
       >
@@ -181,7 +110,6 @@ function CustomizedTable<T extends object>({
               <>
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
-                    console.log(row.getRowProps())
                     return (
                       <>
                         <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
@@ -200,7 +128,7 @@ function CustomizedTable<T extends object>({
                     >
                       <NavDropdown.Item
                         onClick={() => {
-                          console.log('row', row.original)
+                          console.log('updating data', row.original)
                           handleUpdate(row.original as T)
                         }}
                       >
@@ -219,7 +147,7 @@ function CustomizedTable<T extends object>({
           })}
         </tbody>
       </Table>
-      {ModalForm()}
+      {formModal}
       <div className='mt-2 float-left'>
         <Button
           variant='primary'

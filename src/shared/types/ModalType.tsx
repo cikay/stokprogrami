@@ -1,10 +1,10 @@
 import React from 'react'
 
+export type ModalActionType = 'create' | 'update' | 'delete' | ''
+
 type ModalType = {
-  action: 'add' | 'update' | 'delete' | ''
-  setAction: React.Dispatch<
-    React.SetStateAction<'' | 'add' | 'update' | 'delete'>
-  >
+  action: ModalActionType
+  setAction: React.Dispatch<React.SetStateAction<ModalActionType>>
   show: boolean
   setShow: React.Dispatch<React.SetStateAction<boolean>>
 }

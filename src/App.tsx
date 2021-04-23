@@ -13,12 +13,11 @@ import ResetPassword from './auth/ResetPassword'
 import ResetPasswordConfirm from './auth/ResetPasswordConfirm'
 import useLocalStorage from './shared/hooks/useLocalStorage'
 import Home from './home'
+import Categories from './category'
 import Products from './product'
 import Users from './users'
-import Categories from './category'
 import Storages from './storage'
 import PrivateComponent from './shared/components/PrivateComponent'
-import CustomizedTable from './shared/components/CustomizedTable'
 import CustomizedSidebar from './shared/components/SideBar'
 import { ProductProvider } from './shared/contexts/ProductContext'
 import { CategoryProvider } from './shared/contexts/CategoryContext'
@@ -29,7 +28,7 @@ import { UserProvider } from './shared/contexts/UsersContext'
 function Pages() {
   const [currentUser, setCurrentUser] = useLocalStorage('currentUser')
   console.log('currentUser', currentUser)
-  const [action, setAction] = useState<'add' | 'update' | 'delete' | ''>('')
+  const [action, setAction] = useState<'create' | 'update' | 'delete' | ''>('')
   const [show, setShow] = useState(false)
 
   return (

@@ -1,7 +1,9 @@
-import { useStorageContext } from '../shared/contexts/StorageContext'
+import { useState } from 'react'
+import { Storage, useStorageContext } from '../shared/contexts/StorageContext'
 import CustomizedTable from '../shared/components/CustomizedTable'
-
 import ModalType from '../shared/types/ModalType'
+import FormModal from '../shared/components/FormModal'
+
 const storageColumns = [
   {
     Header: 'Depolar',
@@ -19,17 +21,30 @@ function Storages({ action, setAction, show, setShow }: ModalType) {
     deleteStorage,
     updateStorage,
   } = useStorageContext()
-  return (
-    <CustomizedTable
+  const [selectedModel, setSelectedModel] = useState({} as Storage)
+
+  const formModalElement = (
+    <FormModal
       action={action}
       setAction={setAction}
       show={show}
       setShow={setShow}
-      columns={storageColumns}
-      data={storages}
+      inputs={storageColumns[0].columns}
       createModel={createStorage}
-      updateModel={deleteStorage}
-      deleteModel={updateStorage}
+      updateModel={updateStorage}
+      deleteModel={deleteStorage}
+      closeModal={() => setShow(false)}
+      selectedModel={selectedModel}
+    />
+  )
+  return (
+    <CustomizedTable
+      data={storages}
+      columns={storageColumns}
+      setAction={setAction}
+      setShow={setShow}
+      formModal={formModalElement}
+      setSelectedModel={setSelectedModel}
     />
   )
 }

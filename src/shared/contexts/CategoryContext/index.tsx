@@ -11,6 +11,7 @@ const categories: Category[] = makeData(Math.random() * 30, {
 })
 console.log('categories')
 console.table(categories)
+
 const initialState = {
   categories,
   createCategory: (category: Category) => {},
