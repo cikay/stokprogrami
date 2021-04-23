@@ -21,7 +21,7 @@ function Storages({ action, setAction, show, setShow }: ModalType) {
     deleteStorage,
     updateStorage,
   } = useStorageContext()
-  const [selectedModel, setSelectedModel] = useState({} as Storage)
+  const [selectedModel, setSelectedModel] = useState<Storage | undefined>()
 
   const formModalElement = (
     <FormModal

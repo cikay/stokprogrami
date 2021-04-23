@@ -16,7 +16,7 @@ const categoryColumns = [
 ]
 
 function Categories({ action, setAction, show, setShow }: ModalType) {
-  const [selectedModel, setSelectedModel] = useState({} as Category)
+  const [selectedModel, setSelectedModel] = useState<Category | undefined>()
   const {
     categories,
     createCategory,

@@ -7,7 +7,7 @@ import { ModalActionType } from '../types/ModalType'
 
 type Props<T> = React.PropsWithChildren<{
   selectedModel?: T
-  setSelectedModel?: React.Dispatch<React.SetStateAction<T>>
+  setSelectedModel?: React.Dispatch<React.SetStateAction<T | undefined>>
   closeModal: () => void
   inputs: { Header: string; accessor: string }[]
   action: ModalActionType
@@ -74,6 +74,7 @@ export default function FormModal<T extends object>({
     console.log('closing model')
     closeModal()
   }
+  console.log('selected model', selectedModel)
   const actionName = selectedModel ? 'Güncelle' : 'Ekle'
 
   if (action === 'delete') {

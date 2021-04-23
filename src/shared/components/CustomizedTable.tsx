@@ -16,7 +16,7 @@ type Props<T> = React.PropsWithChildren<{
   setShow: React.Dispatch<React.SetStateAction<boolean>>
   data: T[]
   formModal?: JSX.Element
-  setSelectedModel: React.Dispatch<React.SetStateAction<T>>
+  setSelectedModel: React.Dispatch<React.SetStateAction<T | undefined>>
 }>
 
 function CustomizedTable<T extends object>({

@@ -15,7 +15,7 @@ const userColumns = [
 
 function Users({ action, setAction, show, setShow }: ModalType) {
   const { users, createUser, updateUser, deleteUser } = useUserContext()
-  const [selectedModel, setSelectedModel] = useState({} as User)
+  const [selectedModel, setSelectedModel] = useState<User | undefined>()
 
   const formModalElement = (
     <FormModal

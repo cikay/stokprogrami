@@ -23,7 +23,7 @@ function Products({ action, setAction, show, setShow }: ModalType) {
     deleteProduct,
   } = useProductContext()
   console.log('product rendered')
-  const [selectedModel, setSelectedModel] = useState({} as Product)
+  const [selectedModel, setSelectedModel] = useState<Product | undefined>()
 
   const formModalElement = (
     <FormModal
