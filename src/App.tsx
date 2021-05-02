@@ -23,6 +23,7 @@ import { ProductProvider } from './shared/contexts/ProductContext'
 import { CategoryProvider } from './shared/contexts/CategoryContext'
 import { StorageProvider } from './shared/contexts/StorageContext'
 import { UserProvider } from './shared/contexts/UsersContext'
+import Layout from './shared/components/Layout'
 
 // PAGES
 function Pages() {
@@ -33,62 +34,65 @@ function Pages() {
 
   return (
     <Router>
-      <Row>
-        <Col sm={12} md={3}>
-          <CustomizedSidebar />
-        </Col>
-        <Col sm={12} md={9}>
-          <Switch>
-            <Route path='/login'>
-              <Login onSubmitUser={setCurrentUser} />
-            </Route>
-            <Route exact path='/'>
-              <Home />
-            </Route>
-            <Route path='/signup'>
-              <Signup />
-            </Route>
-            <Route path='/reset-password'>
-              <ResetPassword />
-            </Route>
-            <Route path='/reset-password-confirm'>
-              <ResetPasswordConfirm />
-            </Route>{' '}
-            <Route path='/categories'>
-              <Categories
-                action={action}
-                setAction={setAction}
-                show={show}
-                setShow={setShow}
-              />
-            </Route>{' '}
-            <Route path='/products'>
-              <Products
-                action={action}
-                setAction={setAction}
-                show={show}
-                setShow={setShow}
-              />
-            </Route>
-            <Route path='/users'>
-              <Users
-                action={action}
-                setAction={setAction}
-                show={show}
-                setShow={setShow}
-              />
-            </Route>
-            <Route path='/storages'>
-              <Storages
-                action={action}
-                setAction={setAction}
-                show={show}
-                setShow={setShow}
-              />
-            </Route>
-          </Switch>
-        </Col>
-      </Row>
+      <Switch>
+        <Route path='/login'>
+          <Login onSubmitUser={setCurrentUser} />
+        </Route>
+        <Route exact path='/'>
+          <Layout>
+            <Home />
+          </Layout>
+        </Route>
+        <Route path='/signup'>
+          <Signup />
+        </Route>
+        <Route path='/reset-password'>
+          <ResetPassword />
+        </Route>
+        <Route path='/reset-password-confirm'>
+          <ResetPasswordConfirm />
+        </Route>{' '}
+        <Route path='/categories'>
+          <Layout>
+            <Categories
+              action={action}
+              setAction={setAction}
+              show={show}
+              setShow={setShow}
+            />
+          </Layout>
+        </Route>{' '}
+        <Route path='/products'>
+          <Layout>
+            <Products
+              action={action}
+              setAction={setAction}
+              show={show}
+              setShow={setShow}
+            />
+          </Layout>
+        </Route>
+        <Route path='/users'>
+          <Layout>
+            <Users
+              action={action}
+              setAction={setAction}
+              show={show}
+              setShow={setShow}
+            />
+          </Layout>
+        </Route>
+        <Route path='/storages'>
+          <Layout>
+            <Storages
+              action={action}
+              setAction={setAction}
+              show={show}
+              setShow={setShow}
+            />
+          </Layout>
+        </Route>
+      </Switch>
     </Router>
   )
 }

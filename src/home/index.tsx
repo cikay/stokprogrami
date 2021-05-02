@@ -3,15 +3,12 @@ import Users from './shared/components/UsersCard'
 import Storage from './shared/components/StorageCard'
 import Categories from './shared/components/CategoryCard'
 import Product from './shared/components/ProductCard'
-import { useAuthContext } from '../shared/contexts/AuthContext/AutContext'
 import { useCategoryContext } from '../shared/contexts/CategoryContext'
 import { useProductContext } from '../shared/contexts/ProductContext'
 import { useUserContext } from '../shared/contexts/UsersContext'
 import { useStorageContext } from '../shared/contexts/StorageContext'
 
-type Props = React.PropsWithChildren<{}>
-
-export default function Home({}: Props) {
+export default function Home() {
   const { categories } = useCategoryContext()
   const { products } = useProductContext()
   const { users } = useUserContext()
