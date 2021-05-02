@@ -35,10 +35,7 @@ function Pages() {
     <Router>
       <Row>
         <Col sm={12} md={3}>
-          <PrivateComponent
-            Component={<CustomizedSidebar />}
-            onSubmitUser={setCurrentUser}
-          />
+          <CustomizedSidebar />
         </Col>
         <Col sm={12} md={9}>
           <Switch>
@@ -46,10 +43,7 @@ function Pages() {
               <Login onSubmitUser={setCurrentUser} />
             </Route>
             <Route exact path='/'>
-              <PrivateComponent
-                Component={<Home />}
-                onSubmitUser={setCurrentUser}
-              />
+              <Home />
             </Route>
             <Route path='/signup'>
               <Signup />

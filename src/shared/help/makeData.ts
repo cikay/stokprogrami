@@ -8,15 +8,6 @@ const range = (len: number) => {
   return arr
 }
 
-const newProduct = () => {
-  return {
-    id: Number(gen.next().value),
-    name: namor.generate({ words: 1, numbers: 0 }),
-    description: namor.generate({ words: 1, numbers: 0 }),
-    storage: namor.generate({ words: 1, numbers: 0 }),
-    category: namor.generate({ words: 1, numbers: 0 }),
-  }
-}
 const fillObject = <T extends {}>(obj: T) => {
   const createdObj = Object.keys(obj).reduce(
     (acc, key) => ({
